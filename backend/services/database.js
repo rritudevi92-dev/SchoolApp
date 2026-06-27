@@ -13,8 +13,15 @@ function getUsers() {
     return users;
 }
 
+const teachers = [];
+const students = [];
+const admins = [];
+
 module.exports = {
     addUser,
     findUser,
-    getUsers
+    getUsers,
+    teachers,
+    students,
+    admins
 };
