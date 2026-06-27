@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const SECRET = "schoolapp_secret_key";
+const SECRET = process.env.JWT_SECRET || "SchoolApp_2026_Super_Secret_Key";
 
 function authMiddleware(req, res, next) {
     const token = req.headers.authorization;

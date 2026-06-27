@@ -1,10 +1,11 @@
+const bcrypt = require("bcryptjs");
+
 class User {
-    constructor(id, name, email, password, role) {
-        this.id = id;
+    constructor(name, email, password, role) {
         this.name = name;
         this.email = email;
-        this.password = password;
-        this.role = role; // admin, teacher, student
+        this.password = bcrypt.hashSync(password, 10);
+        this.role = role;
     }
 }
 
