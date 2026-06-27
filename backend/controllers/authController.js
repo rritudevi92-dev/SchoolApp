@@ -1,38 +1,32 @@
-const users = [];
+const jwt = require("jsonwebtoken");
 
-exports.signup = (req, res) => {
-    const { name, email, password, role } = req.body;
-
-    users.push({
-        id: users.length + 1,
-        name,
-        email,
-        password,
-        role
-    });
-
-    res.json({
-        success: true,
-        message: "User Registered Successfully"
-    });
-};
+const SECRET = process.env.JWT_SECRET || "SchoolApp_2026_Super_Secret_Key";
 
 exports.login = (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    const user = users.find(
-        u => u.email === email && u.password === password
-    );
+    if (username === "admin" && password === "admin123") {
 
-    if (!user) {
-        return res.status(401).json({
-            success: false,
-            message: "Invalid Email or Password"
+        const token = jwt.sign(
+            {
+                username: username,
+                role: "admin"
+            },
+            SECRET,
+            {
+                expiresIn: "7d"
+            }
+        );
+
+        return res.json({
+            success: true,
+            message: "Login Successful",
+            token: token
         });
     }
 
-    res.json({
-        success: true,
-        user
+    res.status(401).json({
+        success: false,
+        message: "Invalid Username or Password"
     });
 };
