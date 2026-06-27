@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");const jwt = require("jsonwebtoken");
 
 const SECRET = process.env.JWT_SECRET || "SchoolApp_2026_Super_Secret_Key";
 
